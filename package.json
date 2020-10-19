@@ -45,7 +45,7 @@
     "dotenv": "8.2.0",
     "download-git-repo": "3.0.2",
     "express": "4.17.1",
-    "http-proxy-middleware": "0.20.0",
+    "http-proxy-middleware": "1.0.6",
     "husky": "3.1.0",
     "ignore-styles": "5.0.1",
     "immer": "5.0.1",
