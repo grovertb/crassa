@@ -122,7 +122,7 @@ const commands = [
     description: 'Creates a production build for the frontend application.'
   },
   {
-    name       : 'build:sitemap',
+    name       : 'build-sitemap',
     fn         : buildSitemap,
     description: 'Creates a production build for the frontend application with sitemap.'
   },
