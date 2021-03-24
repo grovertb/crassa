@@ -52,6 +52,20 @@ function build() {
   execCmd(cmd, { async: true })
 }
 
+function buildSitemap() {
+  const cmd = `
+          npx cross-env
+            INLINE_RUNTIME_CHUNK=false
+              npx cross-env
+                GENERATE_SOURCEMAP=false 
+                  npx cross-env
+                    NODE_ENV=production
+                      npx cross-env
+                        APP_ROOT=${appRootPath}
+                          npx node ${packageRootPath}/buildSitemap.js`
+  execCmd(cmd, { async: true })
+}
+
 function start() {
   const cmd = `
           npx cross-env
@@ -106,6 +120,11 @@ const commands = [
     name       : 'build',
     fn         : build,
     description: 'Creates a production build for the frontend application.'
+  },
+  {
+    name       : 'build:sitemap',
+    fn         : buildSitemap,
+    description: 'Creates a production build for the frontend application with sitemap.'
   },
   {
     name       : 'start',

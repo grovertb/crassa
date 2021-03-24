@@ -110,6 +110,7 @@ Github repository structure [like](https://github.com/ghondar/counter-with-redux
         │   ├── counter.js
         │   └── index.js
         ├── setupProxy.js
+        ├── sitemap.js
         └── store
             ├── configureStore.dev.js
             ├── configureStore.js
@@ -151,6 +152,7 @@ You can configure the project environment variables
   > REACT_APP_PORT_SERVER
   > REACT_APP_REST_API_LOCATION
   > REACT_APP_API_VERSION
+  > REACT_APP_DOMAIN_SITE
 ```
 
 ## Extensions
@@ -238,6 +240,30 @@ const { override, addWebpackAlias, addBundleVisualizer } = require('customize-cr
 module.exports = override(
   process.env.BUNDLE_VISUALIZE == 1 && addBundleVisualizer()
 )
+```
+
+With __/src/sitemap.js__ you can generate your site's sitemap.xml based on the routes.
+
+Example: (__/src/sitemap.js__)
+
+```javascript
+import Sitemap from 'react-router-sitemap'
+import routes from './routes'
+
+const { REACT_APP_DOMAIN_SITE } = process.env
+
+const filterConfig = {
+  isValid: false,
+  rules  : [ /\/admin/, /\*/ ]
+}
+
+export default (appPublic) => {
+  if(REACT_APP_DOMAIN_SITE)
+    new Sitemap(routes())
+      .filterPaths(filterConfig)
+      .build(REACT_APP_DOMAIN_SITE)
+      .save(`${appPublic}/sitemap.xml`)
+}
 ```
 
 ## Technologies
